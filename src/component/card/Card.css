@@ -1,11 +1,11 @@
-.task-items {
+.card-items {
     background-color: white;
     padding: 10px;
     border-radius: 3px;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
 }
 
-.task-items:not(:last-child) {
+.card-items:not(:last-child) {
     margin-bottom: 10px;
 }
 
