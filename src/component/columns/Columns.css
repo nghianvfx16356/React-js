@@ -1,0 +1,45 @@
+.columns * {
+    background-color: #ebecf0;
+    color: #333;
+    padding: 0 8px;
+}
+
+header {
+    padding-left: 15px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+footer {
+    padding-left: 10px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.task-list {
+    list-style-type: none;
+    margin: 0;
+    max-height: calc(100% - 72px);
+    overflow-y: auto;
+}
+
+.task-list::-webkit-scrollbar {
+    -webkit-animation: none;
+}
+
+.task-list::-webkit-scrollbar:vertical {
+    width: 11px;
+}
+
+.task-list::-webkit-scrollbar-thumb {
+    background-color: #a6a7ac;
+    border-right: 5px solid #ebecf0;
+}
