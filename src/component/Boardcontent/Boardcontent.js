@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import './Boardontent.css';
 import Column from "../columns/Column.js";
 import { initData } from "../../actions/initData";
-import _ from 'lodash';
+import _, { drop } from 'lodash';
 import { mapOrder } from "../../utilities/sorts";
+import { applyDrag } from "../../actions/drag&drop";
 
 const Boardcontent = () => {
     const [board, setBoard] = useState({});
@@ -17,6 +18,8 @@ const Boardcontent = () => {
             setColumns(mapOrder(boardInitData.columns, boardInitData.columnOrder, 'id'))
         }
     }, []);
+
+   
 
     if (_.isEmpty(board)) {
         return (
@@ -33,6 +36,7 @@ const Boardcontent = () => {
                         <Column
                             key={column.id}
                             column={column}
+                            
                         />
                     )
                 })}
