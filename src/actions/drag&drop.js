@@ -1,15 +1,32 @@
-export const applyDrag = (arr, dragResult) => {
-    const { removedIndex, addedIndex, payload } = dragResult;
-    if (removedIndex === null && addedIndex === null) return arr;
+import React from "react";
 
-    const result = [...arr];
-    let itemToAdd = payload;
+export const DraggableItem = ({ item, onDragStart }) => {
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("text/plain", item); // Thiết lập dữ liệu kéo và thả
+    onDragStart(item); // Gọi hàm callback khi bắt đầu kéo
+  };
 
-    if (removedIndex !== null) {
-        itemToAdd = result.splice(removedIndex, 1)[0];
-    }
-    if (addedIndex !== null) {
-        result.splice(addedIndex, 0, itemToAdd);
-    }
-    return result;
-}
+  return (
+    <div draggable onDragStart={handleDragStart}>
+      {item}
+    </div>
+  );
+};
+
+export const DropZone = ({ onDrop, children }) => {
+  const handleDrop = (e) => {
+    e.preventDefault();
+    const data = e.dataTransfer.getData("text/plain"); // Lấy dữ liệu kéo và thả
+    onDrop(data); // Gọi hàm callback khi thả
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  return (
+    <div onDrop={handleDrop} onDragOver={handleDragOver}>
+      {children}
+    </div>
+  );
+};

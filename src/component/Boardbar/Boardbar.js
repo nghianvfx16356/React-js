@@ -1,11 +1,18 @@
 import React from "react";
-import './Boardbar.css';
+import { styled } from "@stitches/react";
 
 const Boardbar = () => {
-    return (
-        <>
-            <nav className='navbar-board'>Board bar</nav>
-        </>
-    )
-}
+  const Nav = styled("nav", {
+    paddingLeft: "10px",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "1.1rem",
+    backgroundColor: "#0079bf",
+  });
+  return (
+    <>
+      <Nav>Board bar</Nav>
+    </>
+  );
+};
 export default Boardbar;

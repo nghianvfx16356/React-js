@@ -1,12 +1,19 @@
 import React from "react";
-import './Appbar.css';
+import { styled } from "@stitches/react";
 
 const Appbar = () => {
-    return (
-        <>
-            <nav className='navbar-app'>App bar</nav>
-        </>
-    )
-}
+  const Nav = styled("nav", {
+    paddingLeft: "10px",
+    display: "flex",
+    alignItems: "center",
+    fontSize: "1.5rem",
+    backgroundColor: "#0067a3",
+  });
+  return (
+    <>
+      <Nav>App bar</Nav>
+    </>
+  );
+};
 
 export default Appbar;
