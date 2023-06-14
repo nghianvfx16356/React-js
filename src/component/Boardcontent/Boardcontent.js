@@ -5,6 +5,7 @@ import { initData } from "../../actions/initData";
 import _ from "lodash";
 import { mapOrder } from "../../utilities/sorts";
 import { styled } from "@stitches/react";
+import { applyDrag } from "../../actions/drag&drop.js";
 
 //Phan CSS
 const Boardcolumns = styled("div", {
@@ -25,12 +26,36 @@ const Boardcolumns = styled("div", {
     backgroundClip: "padding-box",
   },
 });
+const Addnewcolumns = styled("div", {
+  width: "250px",
+  //height: "32px",
+  lineHeight: "32px",
+  padding: "4px 0 4px 15px",
+  cursor: "pointer",
+  color: "Black",
+  marginLeft: "0",
+  fontSize: "15px",
+  backgroundColor: "WhiteSmoke",
+  borderRadius: "5px",
+  "&:hover": {
+    backgroundColor: "Gray",
+  },
+});
+const ContentAdd = styled("div", {
+  padding: "5px",
+
+  backgroundColor: "hsla(0,0,100,.24)",
+});
+const Groupbutton = styled("button", {
+  display: "flex",
+  marginTop: "10px",
+  alignItems: "center",
+});
 
 //Phan Logic
 const Boardcontent = () => {
   const [board, setBoard] = useState({});
   const [columns, setColumns] = useState([]);
-  const [obj, setObj] = useState();
 
   useEffect(() => {
     const boardInitData = initData.boards.find((item) => item.id === "board-1");
@@ -50,7 +75,7 @@ const Boardcontent = () => {
       </>
     );
   }
-  // console.log(columns);
+  //console.log(columns);
   // const boa = columns ? columns[0] : null;
   // const cad = boa.cards;
   // const card = cad ? cad[0] : null;
@@ -68,6 +93,14 @@ const Boardcontent = () => {
               </>
             );
           })}
+        <div>
+          <Addnewcolumns>+ Add another card</Addnewcolumns>
+          <ContentAdd>
+            <input type="text" />
+            <Groupbutton>Add list</Groupbutton>
+            <div>X</div>
+          </ContentAdd>
+        </div>
       </Boardcolumns>
     </>
   );

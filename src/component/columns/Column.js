@@ -39,6 +39,7 @@ const Hea = styled("header", {
   fontWeight: "bold",
   borderTopLeftRadius: "5px",
   borderTopRightRadius: "5px",
+  cursor: "pointer",
 });
 
 const Foo = styled("footer", {
@@ -49,41 +50,51 @@ const Foo = styled("footer", {
   fontWeight: "bold",
   borderBottomLeftRadius: "5px",
   borderBottomRightRadius: "5px",
+  color: "#888",
+  "&:hover": {
+    color: "#333",
+  },
 });
 
 //Phan logic
 
 const Column = (props) => {
   const { column } = props;
-  const cards = column.cards;
-  // const [columns, setColumns] = useState(column);
-  // console.log(columns);
+  //const cards = column.cards;
+  const [list, setList] = useState(column.cards);
+  console.log(list);
+  function dragStart(data) {
+    console.log(data);
+    //data.dataTransfer.setData("text", data);
+  }
+  function allowDrop(e) {
+    e.preventDefault();
+  }
+  function drop(e) {
+    e.preventDefault();
+    let data = ev.dataTransfer.getData("text");
+    e.target.appendChild(document.getElementById(data));
+  }
 
   return (
-    <Col
-      draggable={true}
-      // onDragStart={(e) => {
-      //   console.log("Drag start", e);
-      // }}
-      // onDragOver={(e) => {
-      //   console.log("Drag over", e);
-      // }}
-      // onDrop={(e) => {
-      //   console.log("Drop ", e);
-      // }}
-      // onDragLeave={(e) => {
-      //   console.log("Drag leave", e);
-      // }}
-    >
+    <Col>
       <Hea>{column.title}</Hea>
       <CardList>
-        {cards &&
-          cards.length > 0 &&
-          cards.map((card, index) => {
-            return <Card key={card.id} card={card} />;
+        {list &&
+          list.length > 0 &&
+          list.map((card, index) => {
+            return (
+              <Card
+                key={card.id}
+                card={card}
+                onDragStart={() => {
+                  dragStart(list);
+                }}
+              />
+            );
           })}
       </CardList>
-      <Foo>Add another card</Foo>
+      <Foo>+ Add another card</Foo>
     </Col>
   );
 };

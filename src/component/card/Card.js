@@ -21,38 +21,14 @@ const Img = styled("img", {
 });
 
 // logic
+
 const Card = (props) => {
   const { card } = props;
-  // console.log(cards);
+  //console.log(props);
 
   return (
     <>
-      <CartItem
-        draggable={true}
-        onDragStart={(e) => {
-          e.dataTransfer.setData("text/plain", card);
-          // console.log("Drag start", e);
-        }}
-        onDragOver={(e) => {
-          e.preventDefault();
-          // console.log("Drag over", e);
-        }}
-        onDrop={(e) => {
-          e.preventDefault();
-          console.log(e);
-          const droppedItem = e.dataTransfer.getData(card);
-          console.log(droppedItem);
-          // e.target.innerHTML = droppedItem;
-          // if ((e.target.className = "c-iMyqqg")) {
-
-          // }
-          // console.log("Drop ", e);
-        }}
-        // onDragLeave={(e) => {
-
-        //   console.log("Drag leave", e);
-        // }}
-      >
+      <CartItem draggable="true">
         {card.image && <Img src={card.image} />}
         {card.title}
       </CartItem>
