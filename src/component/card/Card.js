@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 
 import { styled } from "@stitches/react";
+import { set } from "lodash";
+import { ColumnContext } from "../columns/Column";
 
 // Phan css
 const CartItem = styled("div", {
@@ -24,11 +26,20 @@ const Img = styled("img", {
 
 const Card = (props) => {
   const { card } = props;
-  //console.log(props);
+  const { setDraggingItem } = useContext(ColumnContext);
+
+  const dragStart = (e) => {
+    setDraggingItem(e);
+  };
 
   return (
     <>
-      <CartItem draggable="true">
+      <CartItem
+        draggable="true"
+        onDragStart={() => {
+          dragStart(card);
+        }}
+      >
         {card.image && <Img src={card.image} />}
         {card.title}
       </CartItem>

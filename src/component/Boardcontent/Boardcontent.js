@@ -5,7 +5,6 @@ import { initData } from "../../actions/initData";
 import _ from "lodash";
 import { mapOrder } from "../../utilities/sorts";
 import { styled } from "@stitches/react";
-import { applyDrag } from "../../actions/drag&drop.js";
 
 //Phan CSS
 const Boardcolumns = styled("div", {

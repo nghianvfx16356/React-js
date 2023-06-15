@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Card from "../card/Card";
 import { styled } from "@stitches/react";
+import { set } from "lodash";
 
 //Phan CSS
 const Col = styled("div", {
@@ -57,45 +58,50 @@ const Foo = styled("footer", {
 });
 
 //Phan logic
+export const ColumnContext = React.createContext({});
 
 const Column = (props) => {
   const { column } = props;
-  //const cards = column.cards;
-  const [list, setList] = useState(column.cards);
-  console.log(list);
-  function dragStart(data) {
-    console.log(data);
-    //data.dataTransfer.setData("text", data);
-  }
-  function allowDrop(e) {
-    e.preventDefault();
-  }
-  function drop(e) {
-    e.preventDefault();
-    let data = ev.dataTransfer.getData("text");
-    e.target.appendChild(document.getElementById(data));
-  }
+  const [col, setCol] = useState(column);
+  const [list, setList] = useState(col.cards);
+  const [draggingItem, setDraggingItem] = useState({});
 
+  console.log("update", draggingItem);
+  function dragOver(e) {
+    console.log("dragover", e.id);
+  }
+  function drop(ev) {
+    //const targetColumn = ev.target;
+    setCol({
+      ...col,
+      cards: [draggingItem],
+    });
+    console.log("drop");
+    // setList([...list, {}]);
+  }
+  console.log(col);
   return (
-    <Col>
-      <Hea>{column.title}</Hea>
-      <CardList>
-        {list &&
-          list.length > 0 &&
-          list.map((card, index) => {
-            return (
-              <Card
-                key={card.id}
-                card={card}
-                onDragStart={() => {
-                  dragStart(list);
-                }}
-              />
-            );
-          })}
-      </CardList>
-      <Foo>+ Add another card</Foo>
-    </Col>
+    <ColumnContext.Provider value={{ draggingItem, setDraggingItem }}>
+      <Col>
+        <Hea>{column.title}</Hea>
+        <CardList
+          draggable="true"
+          onDragOver={() => {
+            dragOver(col);
+          }}
+          onDrop={(e) => {
+            console.log("drop");
+          }}
+        >
+          {list &&
+            list.length > 0 &&
+            list.map((card, index) => {
+              return <Card key={card.id} card={card} />;
+            })}
+        </CardList>
+        <Foo>+ Add another card</Foo>
+      </Col>
+    </ColumnContext.Provider>
   );
 };
 
